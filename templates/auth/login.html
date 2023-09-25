@@ -1,1 +1,32 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<body class="signup-bg">
+  <div class="container " >  
+     <h1 class="text-center logo my-4">
+      <a href="{% url 'home' %}" class="main">Cattleware<span>.</span></a>
+    </h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Sign up</h3>
+    <form method="post" role="form" class="php-email-form">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {% include 'forms.html' %}
+      <br>
+      <div class="text-center"><button type="submit">Login</button></div>
+    </form>
+    </div>
+          <div class="card-footer text-muted text-center">
+            Don't have an account? <a href="#">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock body%}

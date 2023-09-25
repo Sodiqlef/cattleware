@@ -6,7 +6,7 @@ from django.db import models
 class Cattle(models.Model):
     name = models.CharField(max_length=255)
     breed = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
+    age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=[
                               ('Male', 'Male'), ('Female', 'Female')])
     weight = models.DecimalField(max_digits=5, decimal_places=2)
@@ -45,5 +45,6 @@ class BreedingRecord(models.Model):
 
     def __str__(self):
         return f"{self.cattle.name}'s Breeding Record with {self.mate}"
+
 
 

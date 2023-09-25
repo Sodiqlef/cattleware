@@ -1841,7 +1841,7 @@ section {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type=submit] {
+.php-email-form button[type=submit] {
   background: var(--color-primary);
   border: 0;
   padding: 14px 45px;
@@ -1850,7 +1850,7 @@ section {
   border-radius: 50px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+ .php-email-form button[type=submit]:hover {
   background: rgba(0, 131, 116, 0.8);
 }
 
@@ -2666,4 +2666,44 @@ section {
 
 .footer .credits a {
   color: #fff;
+}
+
+.signup-bg{
+  height: 100%;
+  background-color: #008374;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 120 120'%3E%3Cpolygon fill='%23000' fill-opacity='.1' points='120 0 120 60 90 30 60 0 0 0 0 0 60 60 0 120 60 120 90 90 120 60 120 0'/%3E%3C/svg%3E");
+}
+
+.signup-bg .main{
+  color: white;
+}
+
+.signup-bg .main:hover{
+  color: #f85a40;
+}
+
+div .logout{
+  background-color: white!important;
+  border-radius: 20px;
+  padding-left: 5px!important;
+  padding-right: 5px!important;
+  font-weight: bold;
+}
+
+.logout a{
+  color: #f85a40!important;
+}
+
+.logout a:hover{
+  color: #008374!important;
+}
+
+.sm-logout{
+  display: none!important;
+}
+
+@media screen and (max-width: 768px) {
+  .sm-logout{
+  
+  }
 }
