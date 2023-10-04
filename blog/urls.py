@@ -6,5 +6,5 @@ urlpatterns = [
     path('blog/<int:post_id>/', views.blog_post_detail, name='blog_post_detail'),
     path('blog/create/', views.blog_post_create, name='blog_post_create'),
     path('blog/edit/<int:post_id>/', views.blog_post_edit, name='blog_post_edit'),
-
+    path('post/<int:post_id>/comment/', views.blog_post_detail, name='add_comment_to_post'),
 ]

@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cattle, HealthRecord, Vaccination, BreedingRecord
 from .forms import CattleForm, HealthRecordForm, VaccinationForm, BreedingRecordForm
+from blog.models import BlogPost
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'index.html')
+    recent_blogs = BlogPost.objects.all().order_by('-pub_date')[:3]
+    return render(request, 'index.html', {"recent_blogs": recent_blogs})
 
 
 
