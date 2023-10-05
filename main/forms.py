@@ -5,7 +5,7 @@ from .models import Cattle, HealthRecord, Vaccination, BreedingRecord
 class CattleForm(forms.ModelForm):
     class Meta:
         model = Cattle
-        fields = ['name', 'breed', 'age', 'gender', 'weight']
+        fields = ['name', 'breed', 'age', 'price', 'location', 'gender']
         # You can customize the fields as needed
 
 

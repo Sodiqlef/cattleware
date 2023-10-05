@@ -7,11 +7,12 @@ class Cattle(models.Model):
     name = models.CharField(max_length=255)
     breed = models.CharField(max_length=100)
     age = models.IntegerField()
+    price = models.IntegerField(default=0)
     gender = models.CharField(max_length=10, choices=[
                               ('Male', 'Male'), ('Female', 'Female')])
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-    # Assuming you have user authentication
+    location = models.CharField(max_length=255, default="", null=True, blank=True)
     owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.name

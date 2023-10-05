@@ -16,7 +16,7 @@ def home(request):
 
 @login_required
 def cattle_list(request):
-    cattle_records = Cattle.objects.filter(user=request.user)
+    cattle_records = Cattle.objects.filter(owner=request.user).order_by('-pub_date')
     return render(request, 'cattle_list.html', {'cattle_records': cattle_records})
 
 
