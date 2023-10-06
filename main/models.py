@@ -8,8 +8,12 @@ class Cattle(models.Model):
     breed = models.CharField(max_length=100)
     age = models.IntegerField()
     price = models.IntegerField(default=0)
+    birth_date = models.DateTimeField()
+    weight = models.DecimalField(decimal_places=2)
     gender = models.CharField(max_length=10, choices=[
                               ('Male', 'Male'), ('Female', 'Female')])
+    sold = models.BooleanField(default=False)
+    Dead = models.BooleanField(default=False)
     location = models.CharField(max_length=255, default="", null=True, blank=True)
     owner = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
