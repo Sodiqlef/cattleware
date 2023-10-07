@@ -17,4 +17,3 @@ def signup(request):
     context = {'form':form}
     return render(request, 'auth/signup.html', context)
 
-

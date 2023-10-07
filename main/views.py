@@ -48,3 +48,5 @@ def edit_cattle(request, pk):
     return render(request, 'edit_cattle.html', {'form': form})
 
 
+def profile(request):
+    return render(request, 'profile.html')

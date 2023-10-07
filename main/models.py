@@ -9,7 +9,7 @@ class Cattle(models.Model):
     age = models.IntegerField()
     price = models.IntegerField(default=0)
     birth_date = models.DateTimeField()
-    weight = models.DecimalField(decimal_places=2)
+    weight = models.DecimalField(decimal_places=2, max_digits=5)
     gender = models.CharField(max_length=10, choices=[
                               ('Male', 'Male'), ('Female', 'Female')])
     sold = models.BooleanField(default=False)

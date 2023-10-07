@@ -5,13 +5,12 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-body{
+.body{
   display: flex;
   align-items: center;
   padding: 0 10px;
   justify-content: center;
   min-height: 100vh;
-  background: #9B59B6;
 }
 .wrapper{
   width: 450px;
@@ -95,7 +94,7 @@ header .current-date{
   transform: translate(-50%, -50%);
 }
 .days li.active::before{
-  background: #9B59B6;
+  background: #008374;
 }
 .days li:not(.active):hover::before{
   background: #f2f2f2;
