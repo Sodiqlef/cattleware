@@ -24,13 +24,15 @@
       </nav>
     </div><!-- End Breadcrumbs -->
 <br>
-<div class="container">
-<div class="card">
+<div class="container ">
+    <div class="row">
+<div class="card col-6">
     <img class="card-img" src="{% static 'img/team/team-1.jpg' %}" alt="Card image">
+    <h3 class="card p-3 text-right">{{user.username| title}} </h3>
   </div>
 
 
-<div class="body signup-bg">
+<div class="body col-6 signup-bg">
 <div class="wrapper">
       <header>
         <p class="current-date"></p>
@@ -52,6 +54,7 @@
         <ul class="days"></ul>
       </div>
     </div>
+</div>
 </div>
 </div>
 <br>
