@@ -40,11 +40,10 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{% url  'home' %}">Home</a></li>
-          <li><a href="{% url 'cattle_list' %}">Cattles</a></li>
-          <li><a href="{% url 'add_cattle' %}">Add Cattle</a></li>
-          <li><a href="{% url 'blog_post_list' %}">Blog</a></li>
-          <li><a href="{% url 'blog_post_create' %}">Create Blog</a></li>
-          <li><a href="#contact">Buy Cattle</a></li>
+          <li><a href="#about">Profile</a></li>
+          <li><a href="#services">Cattles</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
           <li ><a href="{% url 'logout' %}" >Logout</a></li>
           
         </ul>
@@ -66,7 +65,7 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Upload New Cattle</h3>
-    <form method="post" enctype="multipart/form-data" role="form" class="php-email-form">
+    <form method="post" role="form" class="php-email-form">
       {% csrf_token %}
       {% include 'forms.html' %}
       <br>

@@ -1458,7 +1458,6 @@ section {
   margin: 30px auto 30px auto;
   width: 70px;
   height: 70px;
-  background: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1479,10 +1478,6 @@ section {
   content: "";
   height: 86px;
   width: 86px;
-  border-radius: 50%;
-  background: #87c1bb;
-  transition: all 0.3s ease-out 0s;
-  transform: translateZ(-1px);
 }
 
 .pricing .icon::after {
@@ -1490,10 +1485,6 @@ section {
   content: "";
   height: 102px;
   width: 102px;
-  border-radius: 50%;
-  background: #d2eeeb;
-  transition: all 0.3s ease-out 0s;
-  transform: translateZ(-2px);
 }
 
 .pricing h4 {
