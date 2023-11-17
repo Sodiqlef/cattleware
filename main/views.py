@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import timedelta
-from .models import Cattle, DueDate, HealthRecord, Vaccination, BreedingRecord
-from .forms import CattleForm, HealthRecordForm, VaccinationForm, BreedingRecordForm, DueDateForm
+from .models import Cattle, DueDate, HealthRecord, Vaccination
+from .forms import CattleForm, HealthRecordForm, VaccinationForm, DueDateForm
 from blog.models import BlogPost
 
 
@@ -50,12 +50,83 @@ def cattle_list(request):
     return render(request, 'cattle_list.html', {'cattle_records': cattle_records, 'search_query': search_query})
 
 
-
+@login_required
 def cattle_detail(request, pk):
     cattle_record = Cattle.objects.get(pk=pk)
-    return render(request, 'cattle_detail.html', {'cattle_record': cattle_record})
+    health_record = HealthRecord.objects.filter(cattle = cattle_record).order_by('-date')
+    vaccination_record = Vaccination.objects.filter(cattle = cattle_record).order_by('-date_given')
+    return render(request, 'cattle_detail.html', {
+        'cr': cattle_record, 'hr':health_record, 'vr': vaccination_record})
 
 
+@login_required
+def add_hr(request, cattle_id):
+    if request.method == 'POST':
+        form = HealthRecordForm(request.POST)
+        if form.is_valid():
+            cattle = Cattle.objects.get(pk=cattle_id)
+            new_hr = form.save(commit=False)
+            new_hr.cattle = cattle
+            new_hr.save()
+            messages.success(request, 'Your cattle health record was updated successfully!')
+            return redirect('cattle_list')
+        else:
+            messages.error(request, 'Your cattle was not uploaded.')
+    else:
+        form = HealthRecordForm()
+    return render(request, 'add_cattle.html', {'form': form})
+
+
+@login_required
+def edit_hr(request, pk):
+    health_record = HealthRecord.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = HealthRecordForm(request.POST, instance=health_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cattle health record has been edited successfully')
+            return redirect('cattle_detail', pk=health_record.cattle.id)
+        else:
+            messages.error(request, 'An error occured')
+    else:
+        form = HealthRecordForm(instance=health_record)
+    return render(request, 'edit_cattle.html', {'form': form})
+
+
+@login_required
+def add_vr(request, cattle_id):
+    if request.method == 'POST':
+        form = VaccinationForm(request.POST)
+        if form.is_valid():
+            cattle = Cattle.objects.get(pk=cattle_id)
+            new_vr = form.save(commit=False)
+            new_vr.cattle = cattle
+            new_vr.save()
+            messages.success(request, 'Your cattle health record was updated successfully!')
+            return redirect('cattle_list')
+        else:
+            messages.error(request, 'Your cattle was not uploaded.')
+    else:
+        form = VaccinationForm()
+    return render(request, 'add_cattle.html', {'form': form})
+
+
+@login_required
+def edit_vr(request, pk):
+    Vaccination_record = Vaccination.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = VaccinationForm(request.POST, instance=Vaccination_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cattle vaccination record has been edited successfully')
+            return redirect('cattle_detail', pk=pk)
+        else:
+            messages.error(request, 'An error occured')
+    else:
+        form = VaccinationForm(instance=Vaccination_record)
+    return render(request, 'edit_cattle.html', {'form': form})
+
+@login_required
 def add_cattle(request):
     if request.method == 'POST':
         form = CattleForm(request.POST, request.FILES)
@@ -84,6 +155,7 @@ def delete_cattle(request, cattle_id):
         return HttpResponseForbidden("You do not have permission to delete this cattle record.")
 
 
+@login_required
 def edit_cattle(request, pk):
     cattle_record = Cattle.objects.get(pk=pk)
     if request.method == 'POST':
@@ -99,10 +171,12 @@ def edit_cattle(request, pk):
     return render(request, 'edit_cattle.html', {'form': form})
 
 
+@login_required
 def profile(request):
     return render(request, 'profile.html')
 
 
+@login_required
 def add_due_date(request, cattle_id):
     if request.method == "POST" :
 

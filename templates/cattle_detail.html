@@ -4,61 +4,153 @@
 
 {% block content %}
 
-<!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url('');">
-        <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Cartle Details</h2>
-              <p>View the details of your cattle below. Keep track of their health, breeding, and vaccinations in one place for better cattle management.</p>
+<!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3>Welcome to  <strong> {{cr.name}} </strong>Details</h3>
+              
+              <p>
+                Explore a wealth of information about the selected cattle, giving you an 
+                in-depth look at {{ cr.name }}. Discover health insights, feeding habits, 
+                vaccination records, and more. This comprehensive 
+                view allows you to monitor the well-being and breeding program status of your cattle effectively.
+              </p>
+              <p>
+                With data on health check dates, health status, feeding schedules, and vaccination due dates, 
+                you'll have all the details you need to make informed decisions. It's your one-stop resource for managing 
+                your cattle and ensuring their care is in top condition. 
+                Use this information to maintain the health, nutrition, and breeding program of {{ cr.name }} with ease.
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-      <nav>
-        <div class="container">
-          <ol>
-            <li>Hello {{user.username | title}}, you have a total of {{cattle_records.count}} registered Cattles </li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Breadcrumbs -->
 
-    <section id="pricing" class="pricing sections-bg">
-      <div >
+          <div class="col-lg-8">
+            <center>
+                <img src="{{cr.image.url}}">
+            </center>
+          
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row g-4 py-lg-5" data-aos="zoom-out" data-aos-delay="100">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <span class="num">1.</span>
+                    Cattle Records
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><strong>Name:</strong> {{cr.name|title}}</li>
+                      <li class="list-group-item"><strong>Breed:</strong> {{cr.breed|title}}</li>
+                      <li class="list-group-item"><strong>Age:</strong> {{cr.age}}</li>
+                      <li class="list-group-item"><strong>Weight:</strong> {{cr.weight}}</li>
+                      <li class="list-group-item"><strong>birth date:</strong> {{cr.birth_date}}</li>
+                      <li class="list-group-item"><strong>Gender:</strong> {{cr.gender|title}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
 
-        
-        <div class="col-lg-4">
-            <div class="pricing-item">
-              <h3>{{record.name|title}}</h3>
-              <div class="icon">
-                <i class="bi bi-check"></i>
-              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <span class="num">2.</span>
+                    Cattle health records
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    {% for each in hr %}
+                    <ul class="list-group list-group-flush">
+                      <center><b>{{forloop.counter}}</b></center>
+                      <li class="list-group-item"><strong>Condition:</strong> {{each.condition|title}}</li>
+                      <li class="list-group-item" style="white-space: pre-line;"><strong>Treatment:</strong> {{each.treatment|title}}</li>
+                      <li class="list-group-item"><strong>Date:</strong> {{each.date}}</li>
+                      <div class="text-center"><a href="{% url 'edit_health_record' each.pk %}" class="buy-btn">Edit record</a></div>
 
-              <h4><sup>₦</sup>{{record.price}}</h4>
-              <ul>
-                <li><strong>Breed:</strong> {{record.breed}}</li>
-                <li><strong>Age:</strong> {{record.age}}</li>
-                <li><strong>Gender:</strong> {{record.gender}}</li>
-                {% for each in record.duedate.all %}
-                <li><strong>Gender:</strong> {{each.estimated_calving_date}}</li>
-                <br>
-                {% empty %}
-                <br>
-                </ul>
-                
-               
-              <div class="text-center"><a href="#" class="buy-btn">Check record</a></div>
-            <div class="text-center"><a href="#" class="buy-btn">Delete record</a></div>
-            
-          </div>
-          </div><!-- End Pricing Item --><br><br><br>
-{% endfor %}
+                    </ul>
+                    {% empty %}
+                    No records found 
+                    {% endfor %}
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <span class="num">3.</span>
+                    Cattle vaccination records
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    {% for each in vr %}
+                    <ul class="list-group list-group-flush">
+                      <center><b>{{forloop.counter}}</b></center>
+                      <li class="list-group-item"><strong>Vaccine name:</strong> {{each.vaccine_name}}</li>
+                      <li class="list-group-item"><strong>Date given:</strong> {{each.date_given}}</li>
+                      <li class="list-group-item"><strong>Next due date:</strong> {{each.next_due_date}}</li>
+                      
+                    </ul>
+                    {% empty %}
+                    No records found 
+                    {% endfor %}
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <span class="num">4.</span>
+                    Cattle due date record.
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    {% for each in dd %}
+                    <ul class="list-group list-group-flush">
+                      <center><b>{{forloop.counter}}</b></center>
+                      <li class="list-group-item"><strong>Sire breed:</strong> {{each.sire_breed}}</li>
+                      <li class="list-group-item"><strong>Exposure date:</strong> {{each.exposed_to_sire_date}}</li>
+                      <li class="list-group-item"><strong>Estimated Calving date:</strong> {{each.estimated_carlving_date}}</li>
+                      
+                    </ul>
+                    {% empty %}
+                    No records found 
+                    {% endfor %}
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <span class="num">5.</span>
+                    Cattle feeding record.
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    No records found
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
             </div>
 
+          </div>
+        </div>
+
       </div>
-    </section>
+    </section><!-- End Frequently Asked Questions Section -->
+
+
 {% endblock %}

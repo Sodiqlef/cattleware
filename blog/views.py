@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .models import BlogPost, Comment
 from .forms import BlogPostForm, CommentForm
 
@@ -10,7 +11,12 @@ from .forms import BlogPostForm, CommentForm
 
 def blog_post_list(request):
     blog_posts = BlogPost.objects.order_by('-pub_date')
-    return render(request, 'blog/blog_post_list.html', {'blog_posts': blog_posts})
+    posts_per_page = 1
+    paginator = Paginator(blog_posts, posts_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    return render(request, 'blog/blog_post_list.html', {'blog_posts': page})
+
 
 
 def blog_post_detail(request, post_id):
@@ -43,7 +49,7 @@ def blog_post_create(request):
         form = BlogPostForm()
     return render(request, 'blog/blog_post_form.html', {'form': form})
 
-
+@login_required
 def blog_post_edit(request, post_id):
     blog_post = get_object_or_404(BlogPost, pk=post_id)
     if request.method == 'POST':

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cattle, HealthRecord, Vaccination, BreedingRecord, DueDate
+from .models import Cattle, HealthRecord, Vaccination, DueDate
 
 
 
@@ -28,19 +28,13 @@ class CattleForm(forms.ModelForm):
 class HealthRecordForm(forms.ModelForm):
     class Meta:
         model = HealthRecord
-        fields = ['cattle', 'date', 'condition', 'treatment']
+        fields = [  'condition', 'treatment']
         
 
 class VaccinationForm(forms.ModelForm):
     class Meta:
         model = Vaccination
         fields = ['cattle', 'vaccine_name', 'date_given', 'next_due_date']
-
-
-class BreedingRecordForm(forms.ModelForm):
-    class Meta:
-        model = BreedingRecord
-        fields = ['cattle', 'mate', 'breeding_date', 'expected_calving_date']
 
 
 class DueDateForm(forms.ModelForm):

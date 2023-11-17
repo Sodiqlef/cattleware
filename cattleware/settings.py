@@ -66,7 +66,8 @@ INSTALLED_APPS = [
     'main',
     'accounts',
     'blog',
-    'cloudinary'
+    'cloudinary',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,19 @@ LOGIN_URL = 'login'
 # Media files (user-uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+PWA_APP_NAME = 'Cattleware'
+PWA_APP_DESCRIPTION = "The online store for cattle farmers"
+PWA_APP_THEME_COLOR = '#000000'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_START_URL = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/icon.png',
+        'sizes': '192x192'
+    }
+]

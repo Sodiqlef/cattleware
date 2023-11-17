@@ -1,0 +1,62 @@
+{% if blog_posts.has_other_pages %}
+
+
+            
+
+<!-- ***** Displays Previous***** -->
+    {% if blog_posts.has_previous %}
+        <li><a  href="?page={{ blog_posts.previous_page_number }}">&laquo; </a></li>
+    {% endif %}
+<!-- ***** Displays Previous ***** -->
+
+
+<!-- ***** Displays first character ***** -->
+    {% if blog_posts.number == 1 %}
+       <li class="active"><a >{{ blog_posts.number }}</a></li>
+    {% else %}
+     <li > <a href='?page={{ 1 }}'>{{ 1 }}</a></li>
+    {% endif %}
+<!-- ***** Displays first character ends ***** -->
+
+
+<!-- ***** Displays if paging already greater than 2 ***** -->
+    <!-- {% if blog_posts.number > 2 %}
+      <li><a  >..</a></li>
+    {% endif %} -->
+<!-- ***** Displays if paging already greater than 2 ***** -->
+
+
+<!-- ***** Displays each page ***** -->
+    {% for page_num in blog_posts.paginator.page_range %}
+    {% if blog_posts.number == page_num and blog_posts.number != blog_posts.paginator.num_pages and  blog_posts.number != 1%}
+      <li class="active"><a  >{{ page_num }}</a></li>
+    {% endif %}
+    {% endfor %}
+<!-- ***** Displays each page ***** -->
+
+
+<!-- ***** Displays if paging already close to the last one ***** -->
+    <!-- {% if blog_posts.number < blog_posts.paginator.num_pages|add:"-1" %}
+        <li><a  >..</a></li>
+    {% endif %} -->
+<!-- ***** Displays if paging already close to the last one ***** -->
+
+
+<!-- ***** Displays the last number ***** -->
+    {% if blog_posts.number == blog_posts.paginator.num_pages %}
+       <li class="active"><a  >{{ blog_posts.number }}</a></li>
+    {% else %}
+        <li><a href='?page={{ blog_posts.paginator.num_pages }}'>{{ blog_posts.paginator.num_pages }}</a></li>
+    {% endif %}
+<!-- ***** Displays the last number ***** -->
+
+
+<!-- ***** Displays Next ***** -->
+    {% if blog_posts.has_next %}
+        <li><a  href="?page={{ blog_posts.next_page_number }}">&raquo; </a></li>
+    {% endif %}
+<!-- ***** Displays Next ***** -->
+
+
+
+{% endif %}

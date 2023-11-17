@@ -56,17 +56,9 @@
                 <li><strong>Breed:</strong> {{record.breed}}</li>
                 <li><strong>Age:</strong> {{record.age}}</li>
                 <li><strong>Gender:</strong> {{record.gender}}</li>
-                {% for each in record.duedate.all %}
-                <li><strong>Due date:</strong> {{each.estimated_calving_date}}</li>
                 <br>
-                {% empty %}
-                <br>
-                </ul>
-                <div class="text-center"><a href="{% url 'add_due_date' record.pk %}" class="buy-btn">Add due date</a></div>
-                
-                {% endfor %}
               
-              <div class="text-center"><a href="#" class="buy-btn">Check record</a></div>
+              <div class="text-center"><a href="{% url 'cattle_detail' record.pk %}" class="buy-btn">Check record</a></div>
             <div class="text-center"><a href="{% url 'edit_cattle' record.pk%}" class="buy-btn">Edit record</a></div>
             <div class="text-center"><a href="{% url 'delete_cattle' record.pk %}" class="buy-btn">Delete record</a></div>
             

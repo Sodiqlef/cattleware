@@ -28,10 +28,9 @@ class Cattle(models.Model):
 
 class HealthRecord(models.Model):
     cattle = models.ForeignKey(Cattle, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     condition = models.CharField(max_length=255)
     treatment = models.TextField()
-
     def __str__(self):
         return f"{self.cattle.name}'s Health Record on {self.date}"
 
@@ -44,16 +43,6 @@ class Vaccination(models.Model):
 
     def __str__(self):
         return f"{self.cattle.name}'s {self.vaccine_name} Vaccination"
-
-
-class BreedingRecord(models.Model):
-    cattle = models.ForeignKey(Cattle, on_delete=models.CASCADE)
-    mate = models.CharField(max_length=255)
-    breeding_date = models.DateField()
-    expected_calving_date = models.DateField()
-
-    def __str__(self):
-        return f"{self.cattle.name}'s Breeding Record with {self.mate}"
 
 
 class DueDate(models.Model):
